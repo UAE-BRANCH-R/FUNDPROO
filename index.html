@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUNDPRO — Premium Institutional Funding</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --navy: #060A13;
+    --navy2: #0B111E;
+    --card: #111928;
+    --card2: #1F2A3F;
+    --blue: #0088FF;
+    --blue2: #4DA6FF;
+    --gold: #F1B434;
+    --gold2: #FFD275;
+    --white: #F3F4F6;
+    --muted: #9CA3AF;
+    --green: #10B981;
+    --red: #EF4444;
+    --border: rgba(0,136,255,0.2);
+    --glow: rgba(0,136,255,0.4);
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Custom Glow Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-blend-mode: overlay;
+  ::-webkit-scrollbar-thumb { background: var(--card2); border-radius: 4px; border: 2px solid var(--navy); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+ 
+  /* ─── PREMIUM NAVIGATION ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(6, 10, 19, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 76px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+ 
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+ 
+  .logo-icon {
+    position: relative;
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--blue), var(--gold));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    box-shadow: 0 0 25px var(--glow);
+    animation: pulseGlow 3s infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(0,136,255,0.3); }
+    100% { box-shadow: 0 0 30px rgba(241,180,52,0.6); }
+  }
+ 
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #FFFFFF, var(--blue2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+ 
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  .nav-links a:hover { color: var(--blue2); text-shadow: 0 0 10px var(--glow); }
+ 
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue), #0055B3);
+    color: #fff !important;
+    padding: 12px 26px;
+    border-radius: 10px;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 20px rgba(0,136,255,0.4);
+    transition: all 0.3s !important;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0,136,255,0.7); }
+ 
+  /* ─── HERO WITH BACKGROUND ANIMATION ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 900px 600px at 50% 10%, rgba(0,136,255,0.18) 0%, transparent 70%),
+      radial-gradient(circle 500px at 90% 80%, rgba(241,180,52,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+ 
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(0,136,255,0.08);
+    border: 1px solid rgba(0,136,255,0.3);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 13px; font-weight: 700;
+    color: var(--blue2);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 32px;
+    box-shadow: 0 0 20px rgba(0,136,255,0.15);
+  }
+ 
+  .badge-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: livePulse 1.5s infinite;
+  }
+ 
+  @keyframes livePulse {
+    0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+ 
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 120px);
+    letter-spacing: 2px;
+    line-height: 0.95;
+    margin-bottom: 28px;
+  }
+ 
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 20px rgba(0,136,255,0.3));
+  }
+ 
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 22px);
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto 48px;
+    font-weight: 400;
+  }
+ 
+  .hero-btns { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+ 
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue), #0055B3);
+    color: #fff; border: none; cursor: pointer;
+    padding: 18px 40px; border-radius: 12px;
+    font-size: 16px; font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 25px rgba(0,136,255,0.4);
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(0,136,255,0.6);
+  }
+ 
+  .btn-outline {
+    background: transparent;
+    color: var(--white); border: 1px solid var(--border);
+    cursor: pointer;
+    padding: 18px 40px; border-radius: 12px;
+    font-size: 16px; font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--blue); background: rgba(0,136,255,0.1); }
+ 
+  /* ─── LIVE DATA STRIP / TICKER ─── */
+  .stats-bar {
+    background: var(--navy2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 5%;
+    display: flex; justify-content: center;
+    gap: clamp(30px, 6vw, 100px);
+    flex-wrap: wrap;
+    position: relative; z-index: 10;
+  }
+ 
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--blue2);
+    letter-spacing: 1px;
+  }
+  .stat-label {
+    font-size: 12px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 2px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+ 
+  /* ─── CHARTS AND TRADINGVIEW SECTION ─── */
+  .market-insights {
+    background: var(--navy);
+    padding: 90px 5%;
+  }
+  .charts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .chart-placeholder {
+    width: 100%;
+    height: 450px;
+    background: #0e1420;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ─── LIVE WITHDRAWAL FEED (REAL-TIME NOTIFICATIONS EFFECT) ─── */
+  .payout-feed-section {
+    background: var(--navy2);
+    padding: 80px 5%;
+    border-bottom: 1px solid var(--border);
+  }
+  .feed-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .feed-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .payout-card {
+    background: var(--card);
+    border-left: 4px solid var(--green);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 0 16px 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: subtleFloat 4s infinite ease-in-out;
+  }
+  .payout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .payout-user { font-weight: 700; color: var(--white); }
+  .payout-badge { background: rgba(16,185,129,0.15); color: var(--green); padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;}
+  .payout-amount { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: var(--gold); }
+  .payout-method { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+
+  @keyframes subtleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ─── CHALLENGE RULES COMPONENT ─── */
+  .rules-container {
+    max-width: 900px;
+    margin: 40px auto 0;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(241,180,52,0.2);
+    border-radius: 20px;
+    padding: 36px;
+    text-align: left;
+  }
+  .rules-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 12px;
+  }
+  .rules-block {
+    margin-bottom: 24px;
+  }
+  .rules-block-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--blue2);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .rules-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rules-list li {
+    font-size: 14px;
+    color: #D1D5DB;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .rules-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 18px;
+    top: -2px;
+  }
+  .rules-list strong {
+    color: var(--white);
+  }
+
+  /* ─── PLANS SECTIONS ─── */
+  #plans { background: var(--navy2); padding: 100px 5%; }
+  .plans-header { text-align: center; }
+  .plans-header .section-sub { margin: 0 auto 56px; }
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .plan-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px 32px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .plan-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .plan-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,136,255,0.25); border-color: var(--blue2); }
+  .plan-card:hover::before { opacity: 1; }
+  .plan-card.featured { border-color: rgba(241,180,52,0.4); box-shadow: 0 10px 30px rgba(241,180,52,0.05); }
+  .plan-card.featured::before { opacity: 1; background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+  .plan-badge {
+    position: absolute; top: 24px; right: 24px;
+    background: linear-gradient(135deg, var(--gold), #D09314);
+    color: #000; font-size: 11px; font-weight: 800;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 8px;
+  }
+  .plan-name { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .plan-amount { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--white); letter-spacing: 1px; line-height: 1; margin-bottom: 8px; }
+  .plan-amount span { font-size: 24px; color: var(--blue2); }
+  .plan-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 28px; }
+  .plan-price { font-size: 32px; font-weight: 800; color: var(--gold); }
+  .plan-price-label { font-size: 13px; color: var(--muted); }
+  .plan-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px; }
+  .plan-features { list-style: none; margin-bottom: 32px; flex-grow: 1; }
+  .plan-features li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #9CA3AF; padding: 8px 0; }
+  .plan-features li .check { color: var(--green); font-size: 18px; }
+  .plan-btn { width: 100%; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; letter-spacing: 0.5px; }
+  .plan-btn-primary { background: linear-gradient(135deg, var(--blue), #0055B3); color: #fff; border: none; box-shadow: 0 4px 15px rgba(0,136,255,0.3); }
+  .plan-btn-primary:hover { box-shadow: 0 6px 25px rgba(0,136,255,0.5); }
+  .plan-btn-outline { background: transparent; color: var(--blue2); border: 2px solid rgba(0,136,255,0.3); }
+  .plan-btn-outline:hover { background: rgba(0,136,255,0.05); border-color: var(--blue); }
+
+  /* ─── DYNAMIC CHECKOUT FORM ─── */
+  #apply { background: var(--navy); padding: 90px 5%; }
+  .apply-wrapper { max-width: 680px; margin: 0 auto; }
+  .apply-header { text-align: center; margin-bottom: 48px; }
+  .apply-card { background: var(--card); border: 1px solid var(--border); border-radius: 28px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.6); }
+  .steps-bar { background: rgba(255,255,255,0.02); padding: 26px 36px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .step-item { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 8px; position: relative; }
+  .step-item:not(:last-child)::after { content: ''; position: absolute; top: 16px; left: 50%; right: -50%; height: 2px; background: rgba(255,255,255,0.05); z-index: 0; }
+  .step-item.active:not(:last-child)::after, .step-item.done:not(:last-child)::after { background: var(--blue); }
+  .step-circle { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--muted); position: relative; z-index: 1; transition: all 0.3s; }
+  .step-item.active .step-circle { border-color: var(--blue); background: var(--blue); color: #fff; box-shadow: 0 0 15px var(--glow); }
+  .step-item.done .step-circle { border-color: var(--green); background: var(--green); color: #fff; }
+  .step-label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; }
+  .step-item.active .step-label { color: var(--blue2); }
+  .step-item.done .step-label { color: var(--green); }
+
+  .form-body { padding: 40px; }
+  .form-step { display: none; }
+  .form-step.active { display: block; }
+  .form-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .form-desc { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  .field-group { margin-bottom: 24px; }
+  .field-label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .field-input { width: 100%; background: rgba(255,255,255,0.03); border: 1.5px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 18px; color: var(--white); font-family: 'Inter', sans-serif; font-size: 15px; transition: all 0.2s; outline: none; }
+  .field-input:focus { border-color: var(--blue); background: rgba(0,136,255,0.02); box-shadow: 0 0 0 4px rgba(0,136,255,0.15); }
+  
+  .plan-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .plan-option { background: rgba(255,255,255,0.02); border: 2px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 18px 12px; cursor: pointer; transition: all 0.2s; text-align: center; }
+  .plan-option:hover { border-color: rgba(0,136,255,0.4); }
+  .plan-option.selected { border-color: var(--blue); background: rgba(0,136,255,0.05); box-shadow: 0 0 20px rgba(0,136,255,0.2); }
+  .plan-option-amount { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); }
+  .plan-option-price { font-size: 18px; font-weight: 800; color: var(--gold); margin-top: 4px; }
+  .plan-option-label { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+  /* Binance Interactive Interface Component */
+  .binance-box { background: rgba(241,180,52,0.03); border: 1.5px solid rgba(241,180,52,0.2); border-radius: 18px; padding: 24px; margin-bottom: 24px; }
+  .binance-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .binance-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #F1B434, #D09314); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #000; }
+  .binance-title { font-size: 15px; font-weight: 800; color: var(--gold); }
+  .binance-sub { font-size: 12px; color: var(--muted); }
+  .binance-id-display { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: var(--white); background: rgba(241,180,52,0.06); border: 1px solid rgba(241,180,52,0.2); border-radius: 10px; padding: 14px; letter-spacing: 2px; text-align: center; margin-bottom: 16px; }
+  .binance-pay-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; background: #F1B434; color: #000; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; text-decoration: none; transition: all 0.2s; margin-bottom: 12px; }
+  .binance-pay-btn:hover { background: #FFD275; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(241,180,52,0.3); }
+
+  .payment-summary { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px 24px; margin-bottom: 24px; }
+  .summary-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; }
+  .summary-row + .summary-row { border-top: 1px solid rgba(255,255,255,0.05); }
+  .summary-key { color: var(--muted); }
+  .summary-val { font-weight: 600; }
+  .summary-total .summary-key { font-size: 16px; font-weight: 700; color: var(--white); }
+  .summary-total .summary-val { font-size: 22px; font-weight: 800; color: var(--gold); }
+
+  .confirm-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--blue), #0055B3); color: #fff; border: none; cursor: pointer; border-radius: 14px; font-size: 16px; font-weight: 700; transition: all 0.2s; margin-bottom: 12px; }
+  .confirm-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,136,255,0.5); }
+  .form-back { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 14px; display: flex; align-items: center; gap: 6px; margin-bottom: 24px; }
+  .form-back:hover { color: var(--white); }
+
+  /* PROCESSING & PENDING PAYMENT STATE OVERLAYS */
+  .pending-screen { padding: 48px 36px; text-align: center; display: none; }
+  .pending-spinner { width: 64px; height: 64px; border: 4px solid rgba(0,136,255,0.1); border-top-color: var(--blue); border-radius: 50%; margin: 0 auto 24px; animation: spin 1s infinite linear; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* SCREEN STATE STYLES */
+  .success-screen { padding: 40px 32px; text-align: center; display: none; }
+  .success-icon { width: 76px; height: 76px; background: rgba(16,185,129,0.1); border: 2px solid var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 24px; box-shadow: 0 0 25px rgba(16,185,129,0.2); }
+  .success-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--green); margin-bottom: 8px; letter-spacing: 1px; }
+  .account-id-box { background: rgba(16,185,129,0.02); border: 2px dashed var(--green); border-radius: 20px; padding: 24px; margin-bottom: 28px; }
+  .account-id-label { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .account-id-value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--white); letter-spacing: 1px; margin-bottom: 8px; }
+  .account-cred-line { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 0; border-top: 1px dashed rgba(16,185,129,0.2); }
+  .account-cred-line .ckey { color: var(--muted); }
+  .account-cred-line .cval { font-family: 'JetBrains Mono', monospace; color: var(--white); font-weight: 600; }
+  .account-info-row { display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+  .account-info-row .key { color: var(--muted); }
+  .account-info-row .val { font-weight: 600; }
+
+  /* SECTION STANDARD CONFIG */
+  section { padding: 100px 5%; }
+  .section-label { font-size: 12px; font-weight: 700; color: var(--blue2); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 1px; line-height: 1.1; margin-bottom: 16px; }
+  .section-sub { color: var(--muted); font-size: 16px; max-width: 560px; line-height: 1.7; margin-bottom: 60px; }
+
+  /* PROCESS TIMELINE CONTAINER */
+  #how { background: var(--navy); }
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+  .how-card { background: var(--card); border: 1px solid rgba(255,255,255,0.03); border-radius: 20px; padding: 36px 28px; text-align: center; transition: all 0.3s; }
+  .how-card:hover { transform: translateY(-4px); border-color: var(--border); }
+  .how-step-num { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: var(--blue2); letter-spacing: 2px; margin-bottom: 16px; }
+  .how-icon { font-size: 40px; margin-bottom: 20px; display: block; }
+  .how-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .how-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* PREMIUM FOOTER INTERFACE */
+  footer { background: var(--navy2); border-top: 1px solid var(--border); padding: 50px 5%; text-align: center; }
+  .footer-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 20px; }
+  .footer-links { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .footer-links a { color: var(--muted); font-size: 13px; text-decoration: none; font-weight: 500; transition: color 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 12px; color: rgba(156,163,175,0.4); }
+
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .plan-picker { grid-template-columns: 1fr; }
+    .form-body { padding: 28px 20px; }
+    .steps-bar { padding: 20px; }
+    .step-label { display: none; }
+    .rules-container { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- NAVIGATION BAR -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">FP</div>
+    <span class="logo-text">FUNDPRO</span>
+  </a>
+  <div class="nav-links">
+    <a href="#plans">Account Models</a>
+    <a href="#how">Evaluation Phase</a>
+    <a href="#apply" class="nav-cta">Instant Pass</a>
+  </div>
+</nav>
+ 
+<!-- HERO INTRO ELEMENT -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Institutional Capital Allotment Open
+  </div>
+  <h1>
+    Trade Maximized<br>
+    <span>Corporate Capital</span>
+  </h1>
+  <p class="hero-sub">
+    Gain immediate access to premium allocated demo funding pools. Zero absolute liability on your private financial reserves. Evaluate, pass risk management parameter thresholds, and claim credentials.
+  </p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">
+      Explore Funding Sizes →
+    </button>
+    <button class="btn-outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
+      Review Evaluation Protocol
+    </button>
+  </div>
+</section>
+ 
+<!-- PERFORMANCE AND STATISTICS METRICS STRIP -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">$14.8M+</div>
+    <div class="stat-label">Allocated Balances</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3,900+</div>
+    <div class="stat-label">Authorized Operators</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">24H - 48H</div>
+    <div class="stat-label">Payout Settlement</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">99.98%</div>
+    <div class="stat-label">Infrastructure Uptime</div>
+  </div>
+</div>
+
+<!-- ADVANCED LIVE MARKET DATA / TRADING CHART COMPONENT -->
+<section class="market-insights">
+  <div class="section-label" style="text-align:center">Terminal</div>
+  <h2 class="section-title" style="text-align:center; margin-bottom:12px">Institutional Market Stream</h2>
+  <p class="section-sub" style="text-align:center; margin:0 auto 50px">Real-time terminal conditions overviewing global liquidity assets mapped for internal operators.</p>
+  <div class="charts-container">
+    <div class="chart-placeholder">
+      <!-- Embedded Advanced Real-Time Financial Widget Container -->
+      <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=FX%3AEURUSD&interval=D&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D&theme=dark&style=1&timezone=Etc%2FUTC&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=fundpro&utm_medium=widget&utm_campaign=chart&utm_term=FX%3AEURUSD" style="width: 100%; height: 100%; border: none; margin: 0; padding: 0;"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE REAL-TIME SETTLEMENT FEED PANEL -->
+<section class="payout-feed-section">
+  <div class="feed-title">
+    <div class="section-label">Settlements</div>
+    <h2 class="section-title">Live Dynamic Payout Stream</h2>
+    <p class="section-sub" style="margin: 0 auto;">Continuous global disbursement clearances remitted directly to our verified global independent contractors.</p>
+  </div>
+  <div class="feed-container" id="live-payout-grid">
+    <!-- Seed items will be populated/rotated via script logic below -->
+  </div>
+</section>
+ 
+<!-- OPERATIONAL PARAMETERS AND PROTOCOL RULES SECTION -->
+<section id="how">
+  <div class="section-label" style="text-align:center">Framework</div>
+  <h2 class="section-title" style="text-align:center;margin-bottom:12px">Risk Protocol Specifications</h2>
+  <p class="section-sub" style="text-align:center;margin:0 auto 40px">Rigid structural accountability bounds mapping out the evaluation verification pathway.</p>
+ 
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-step-num">PHASE 01</div>
+      <span class="how-icon">📋</span>
+      <div class="how-title">Tier Designation</div>
+      <div class="how-desc">Select $15K, $20K, or $25K capital metrics configurations aligning with current volume risk profile requirements.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-step-num">PHASE 02</div>
+      <span class="how-icon">💳</span>
+      <div class="how-title">Binance Clearance</div>
+      <div class="how-desc">Process transaction metrics straight to our encrypted security processing gateway ID directly.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-step-num">PHASE 03</div>
+      <span class="how-icon">🚀</span>
+      <div class="how-title">Credential Dispatch</div>
+      <div class="how-desc">Acquire server environment connection credentials instantaneously via the operational terminal module upon validation lock.</div>
+    </div>
+  </div>
+
+  <!-- Dynamic Multi-Tier Adjusted Specification Module -->
+  <div class="rules-container">
+    <div class="rules-heading">
+      <span>🛡️</span> Institutional Account Evaluation Guidelines & Risk Rules
+    </div>
+    
+    <div class="rules-block">
+      <div class="rules-block-title">1. Operational Targets & Structural Bounds (Target & Limits)</div>
+      <ul class="rules-list">
+        <li><strong>Net Profit Matrix Target:</strong> Operators must generate an absolute 60% profit relative to their capital designation base within the simulated environment environment.
+          <br><span style="color: var(--blue2);" id="rules-target-desc">• For $15K Account: Target is $9,000 | For $20K Account: Target is $12,000 | For $25K Account: Target is $15,000</span>
+        </li>
+        <li><strong>Absolute Execution Limits:</strong> A max limit of exactly <strong>10 total individual transaction executions</strong> is permissible. The aggregate profit metric threshold must be reached inside this exact allocation window.</li>
+        <li><strong>Statistical Precision Threshold (Accuracy):</strong> The execution data sequence must reflect a minimum baseline precision consistency rating of at least <strong>65% win-accuracy</strong>. This mathematically implies that <strong>7 out of the 10 executed trade orders</strong> must close within positive profit territory.</li>
+      </ul>
+    </div>
+
+    <div class="rules-block">
+      <div class="rules-block-title">2. Capital Drawdown & Risk Boundaries (Drawdown Rules)</div>
+      <ul class="rules-list">
+        <li><strong>Daily Maximum Stop-Loss Limit (Daily SL):</strong> Total relative equity drawdown contraction across a standard 24-hour market loop interval cannot surpass 2% of total allocated balance. Interfacing engines auto-lock upon breach.
+          <br><span style="color: var(--red);" id="rules-dailysl-desc">• For $15K Base: Max $300 daily contraction | For $20K Base: Max $400 daily contraction | For $25K Base: Max $500 daily contraction</span>
+        </li>
+        <li><strong>Absolute Maximum System Drawdown Cap (Max SL):</strong> Aggregate total accumulated drawdown parameters across the active lifetime duration of the assessment sequence cannot exceed 6% total base allocation value.
+          <br><span style="color: var(--red);" id="rules-maxsl-desc">• For $15K Base: Max $900 total limit | For $20K Base: Max $1,200 total limit | For $25K Base: Max $1,500 total limit</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="rules-block">
+      <div class="rules-block-title">3. Structural Consistency Verification (Verification Phase)</div>
+      <ul class="rules-list">
+        <li><strong>Extended Performance Audit:</strong> Upon successful compliance verification regarding all core milestones above, the terminal prompts for exactly <strong>3 additional confirmation executions</strong>.</li>
+        <li><strong>Consistency Locking:</strong> These terminal verification orders must reflect deliberate premium risk application choices executed confidently into profit territory to lock verification security profiles.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+ 
+<!-- CAPITALS TIERS / PRICING COMPONENT -->
+<section id="plans">
+  <div class="plans-header">
+    <div class="section-label">Allocation Matrix</div>
+    <h2 class="section-title">Institutional Account Allocations</h2>
+    <p class="section-sub">Deploy structural liquid backing at extreme efficiency scales with explicit zero processing hooks.</p>
+  </div>
+ 
+  <div class="plans-grid">
+    <!-- Tier 1: 15K -->
+    <div class="plan-card">
+      <div class="plan-name">Starter Allocation Tier</div>
+      <div class="plan-amount"><span>$</span>15,000</div>
+      <div class="plan-price-row">
+        <span class="plan-price">$82</span>
+        <span class="plan-price-label">one-time commitment fee</span>
+      </div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> $15,000 Demo Funded Base</li>
+        <li><span class="check">✓</span> Target Cap: $9,000 Profit Matrix</li>
+        <li><span class="check">✓</span> Max Drawdown Guardrail: $900</li>
+        <li><span class="check">✓</span> MT5 Environment Connectivity</li>
+        <li><span class="check">✓</span> Priority Execution Engine</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline" onclick="startApply('15k', 82)">Deploy Model →</button>
+    </div>
+ 
+    <!-- Tier 2: 20K -->
+    <div class="plan-card featured">
+      <div class="plan-badge">Most Allocated</div>
+      <div class="plan-name">Pro Acceleration Tier</div>
+      <div class="plan-amount"><span>$</span>20,000</div>
+      <div class="plan-price-row">
+        <span class="plan-price">$99</span>
+        <span class="plan-price-label">one-time commitment fee</span>
+      </div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> $20,000 Demo Funded Base</li>
+        <li><span class="check">✓</span> Target Cap: $12,000 Profit Matrix</li>
+        <li><span class="check">✓</span> Max Drawdown Guardrail: $1,200</li>
+        <li><span class="check">✓</span> MT5 Environment Connectivity</li>
+        <li><span class="check">✓</span> Dedicated Liquidity Bridge</li>
+      </ul>
+      <button class="plan-btn plan-btn-primary" onclick="startApply('20k', 99)">Deploy Model →</button>
+    </div>
+
+    <!-- Tier 3: 25K -->
+    <div class="plan-card">
+      <div class="plan-name">Max Enterprise Tier</div>
+      <div class="plan-amount"><span>$</span>25,000</div>
+      <div class="plan-price-row">
+        <span class="plan-price">$107</span>
+        <span class="plan-price-label">one-time commitment fee</span>
+      </div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> $25,000 Demo Funded Base</li>
+        <li><span class="check">✓</span> Target Cap: $15,000 Profit Matrix</li>
+        <li><span class="check">✓</span> Max Drawdown Guardrail: $1,500</li>
+        <li><span class="check">✓</span> Advanced Liquid Asset Spreads</li>
+        <li><span class="check">✓</span> Direct Risk Desk Access</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline" onclick="startApply('25k', 107)">Deploy Model →</button>
+    </div>
+  </div>
+</section>
+ 
+<!-- SYSTEM INTEGRATED APPLICATION GATEWAY SECTION -->
+<section id="apply" style="background:var(--navy2);">
+  <div class="apply-wrapper">
+    <div class="apply-header">
+      <div class="section-label">Onboarding Terminal</div>
+      <h2 class="section-title">Initialize Capital Designation</h2>
+      <p class="section-sub" style="margin:0 auto">Conclude structural criteria inputs to lock the system allocation pipeline array securely.</p>
+    </div>
+ 
+    <div class="apply-card">
+      <!-- Checkout Interactive Progress Node Indicators -->
+      <div class="steps-bar">
+        <div class="step-item active" id="step-indicator-1">
+          <div class="step-circle" id="step-circle-1">1</div>
+          <span class="step-label">Allocation Matrix</span>
+        </div>
+        <div class="step-item" id="step-indicator-2">
+          <div class="step-circle" id="step-circle-2">2</div>
+          <span class="step-label">Operator Info</span>
+        </div>
+        <div class="step-item" id="step-indicator-3">
+          <div class="step-circle" id="step-circle-3">3</div>
+          <span class="step-label">Settlement Sync</span>
+        </div>
+      </div>
+ 
+      <!-- INTERACTIVE CORE LAYOUT MODULE -->
+      <div class="form-body" id="form-area">
+ 
+        <!-- NODE STEP 1: Operational Model Allocation Pick -->
+        <div class="form-step active" id="form-step-1">
+          <div class="form-title">Designate Balance Model Size</div>
+          <div class="form-desc">Lock the system configuration capacity for processing.</div>
+ 
+          <div class="field-group">
+            <label class="field-label">System Size Capacity</label>
+            <div class="plan-picker">
+              <div class="plan-option" id="opt-15k" onclick="setActivePlan('15k', 82)">
+                <div class="plan-option-amount">$15K</div>
+                <div class="plan-option-price">$82</div>
+                <div class="plan-option-label">Starter Asset</div>
+              </div>
+              <div class="plan-option" id="opt-20k" onclick="setActivePlan('20k', 99)">
+                <div class="plan-option-amount">$20K</div>
+                <div class="plan-option-price">$99</div>
+                <div class="plan-option-label">Pro Balance</div>
+              </div>
+              <div class="plan-option" id="opt-25k" onclick="setActivePlan('25k', 107)">
+                <div class="plan-option-amount">$25K</div>
+                <div class="plan-option-price">$107</div>
+                <div class="plan-option-label">Enterprise Base</div>
+              </div>
+            </div>
+          </div>
+ 
+          <button class="confirm-btn" onclick="goStep(2)">Proceed to Operator Information →</button>
+        </div>
+ 
+        <!-- NODE STEP 2: Client Profile Parameter Intake -->
+        <div class="form-step" id="form-step-2">
+          <button class="form-back" onclick="goStep(1)">← Return to Model Designations</button>
+          <div class="form-title">Operator Profile Specification</div>
+          <div class="form-desc">Provide parameters requested below to finalize identity sync logs.</div>
+ 
+          <div class="field-group">
+            <label class="field-label">Legal Profile Full Name</label>
+            <input type="text" class="field-input" id="input-name" placeholder="Specify full registration name" />
+          </div>
+ 
+          <div class="field-group">
+            <label class="field-label">Secure Communications Email</label>
+            <input type="email" class="field-input" id="input-email" placeholder="operator@terminal.com" />
+          </div>
+ 
+          <div class="field-group">
+            <label class="field-label">Verification Communications Line</label>
+            <input type="tel" class="field-input" id="input-phone" placeholder="+880 1XXX XXXXXX" />
+          </div>
+ 
+          <button class="confirm-btn" onclick="goStep(3)">Proceed to Gateway Synchronization →</button>
+        </div>
+ 
+        <!-- NODE STEP 3: Secure Settlement Sync & Processing -->
+        <div class="form-step" id="form-step-3">
+          <button class="form-back" onclick="goStep(2)">← Return to Operator Profile</button>
+          <div class="form-title">Gateway Settlement Processing</div>
+          <div class="form-desc">Issue the exact commitment value to our centralized secure cryptographic gateway array infrastructure listed below.</div>
+ 
+          <!-- Institutional Binance ID Box Module -->
+          <div class="binance-box">
+            <div class="binance-header">
+              <div class="binance-icon">🟡</div>
+              <div>
+                <div class="binance-title">Authorized Binance Pay Destination ID</div>
+                <div class="binance-sub">Click button below to execute direct app settlement mapping</div>
+              </div>
+            </div>
+            <div class="binance-id-display" id="binance-id-show">1130983375</div>
+            
+            <!-- Direct URL Redirection Link Target Setup for User Execution Requirements -->
+            <a href="https://pay.binance.com" target="_blank" class="binance-pay-btn">
+              <span>🚀</span> Launch Binance App & Pay Now
+            </a>
+            
+            <div class="binance-hint">⚠️ Insufficient or mismatched settlement values fail automated protocol confirmation array validations. Always account for transaction cost offsets.</div>
+          </div>
+ 
+          <!-- Value Verification Summary Interface -->
+          <div class="payment-summary">
+            <div class="summary-row">
+              <span class="summary-key">Designated Model Tier</span>
+              <span class="summary-val" id="summary-plan">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-key">Allocation Target Size</span>
+              <span class="summary-val" id="summary-size">—</span>
+            </div>
+            <div class="summary-row summary-total">
+              <span class="summary-key">Aggregate Fee Commitment</span>
+              <span class="summary-val" id="summary-total">—</span>
+            </div>
+          </div>
+ 
+          <div class="field-group">
+            <label class="field-label">Cryptographic Binance Transaction ID (TxID)</label>
+            <input type="text" class="field-input" id="input-txid" placeholder="Provide system internal tracking execution transaction ID" style="font-family:'JetBrains Mono',monospace;" />
+          </div>
+ 
+          <button class="confirm-btn" onclick="submitApplication()">✓ Synchronize Transfer Logs & Secure Assets</button>
+        </div>
+ 
+      </div>
+ 
+      <!-- IMMUTABLE PROGRESS HOLD STATE PROCESSING FEED -->
+      <div class="pending-screen" id="pending-screen">
+        <div class="pending-spinner"></div>
+        <div class="success-title" style="color: var(--gold);">Auditing Gate Logs...</div>
+        <p class="success-sub" style="max-width: 480px; margin: 0 auto 20px;">
+          Your cryptographic TxID parameters are undergoing structural verification across decentral verification blocks.
+        </p>
+        <div class="account-id-box" style="border-color: var(--gold);">
+          <div class="account-id-label" style="color: var(--gold);">Estimated Verification Lock Time</div>
+          <div class="account-id-value" style="font-size: 20px; color: var(--gold2);">24 Hours Remaining</div>
+          <div class="account-id-hint">This processing frame locks down your allocated pool base. Do not reload or interrupt system context storage flags.</div>
+        </div>
+      </div>
+
+      <!-- PERSISTENT STATE IMMUTABLE VERIFIED SUCCESS DISPLAY MODULE -->
+      <div class="success-screen" id="success-screen">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Verification Locked!</div>
+        <p class="success-sub">
+          Automated validation checks passed cleanly.<br>
+          Your terminal assignment parameters stand deployed across active infrastructure targets.
+        </p>
+ 
+        <div class="account-id-box">
+          <div class="account-id-label">🎉 Authorized Server Connection Node Parameters</div>
+          <div class="account-id-value" id="reveal-account-id">—</div>
+          
+          <div class="account-cred-line">
+            <span class="ckey">Assigned Platform Interface:</span>
+            <span class="cval">Exness-MT5Trial6</span>
+          </div>
+          <div class="account-cred-line">
+            <span class="ckey">Master Password Token:</span>
+            <span class="cval">TFundingproo1@</span>
+          </div>
+          <div class="account-cred-line">
+            <span class="ckey">System Login ID UID:</span>
+            <span class="cval">413934359</span>
+          </div>
+          <div class="account-id-hint">Map these credentials precisely into the global MT5 engine node interface network layer.</div>
+        </div>
+ 
+        <div style="text-align:left">
+          <div class="account-info-row">
+            <span class="key">Assigned Authorized Contractor:</span>
+            <span class="val" id="reveal-name">—</span>
+          </div>
+          <div class="account-info-row">
+            <span class="key">Provisioned Balance Base:</span>
+            <span class="val" id="reveal-size">—</span>
+          </div>
+          <div class="account-info-row">
+            <span class="key">Risk Model Framework Tier:</span>
+            <span class="val" id="reveal-plan">—</span>
+          </div>
+          <div class="account-info-row">
+            <span class="key">Verification Pipeline State:</span>
+            <span class="val" style="color:var(--green)">● Active Simulated Production Pool</span>
+          </div>
+        </div>
+ 
+        <div class="funded-badge">
+          <span class="funded-pulse"></span>
+          Operational Authority Granted
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER CONFIGURATION MODULE -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-icon">FP</div>
+    <span class="logo-text">FUNDPRO</span>
+  </div>
+  <div class="footer-links">
+    <a href="#">Corporate Base</a>
+    <a href="#plans">Models</a>
+    <a href="#how">Protocols</a>
+    <a href="#apply">Gateway</a>
+    <a href="#">Compliance Scope</a>
+    <a href="#">Support Hub</a>
+  </div>
+  <p class="footer-copy">© 2026 FUNDPRO Infrastructure Group. All system rights fully reserved. Speculative high frequency tracking matrices encompass heavy asset termination risks.</p>
+</footer>
+ 
+<script>
+  // ── CENTRALIZED SYSTEM RECONCILIATION DATA CONFIGURATION ────────────────
+  const BINANCE_ID = "1130983375";
+  
+  // Static immutable verification arrays across structural allocation frameworks
+  const ACCOUNT_IDS_15K = ["FP-15K-NODE-90342", "FP-15K-NODE-11940", "FP-15K-NODE-77312"];
+  const ACCOUNT_IDS_20K = ["FP-20K-NODE-55823", "FP-20K-NODE-40911", "FP-20K-NODE-66234"];
+  const ACCOUNT_IDS_25K = ["FP-25K-NODE-88319", "FP-25K-NODE-99014", "FP-25K-NODE-20351"];
+ 
+  // Seed database configuration lists to fuel live programmatic settlement engine tickers dynamically
+  const MOCK_NAMES = ["Alexander M.", "alkan.", "Hiroshi T.", "Elena R.", "Mateo S.", "David K.", "Siddharth V.", "Sarah L.", "Amine B.", "Linus O."];
+  const MOCK_VALS = ["$2,450.00", "$4,810.00", "$1,930.00", "$6,200.00", "$3,110.00", "$7,890.00", "$5,000.00", "$1,240.00"];
+  const MOCK_METHODS = ["Binance Pay", "Crypto Direct Transfer", "USDT ERC20 Wire"];
+  // ────────────────────────────────────────────────────────────────────────
+ 
+  let selectedPlan = null;
+  let selectedPrice = null;
+  let currentStep = 1;
+ 
+  // Initialize state configurations upon tracking window load pipeline loops
+  window.addEventListener("DOMContentLoaded", () => {
+    generateLivePayouts();
+    setInterval(rotateLivePayouts, 5000);
+    checkLocalStorageLockState();
+  });
+
+  function generateLivePayouts() {
+    const grid = document.getElementById("live-payout-grid");
+    if(!grid) return;
+    grid.innerHTML = "";
+    for(let i = 0; i < 4; i++) {
+      grid.appendChild(createRandomPayoutCard());
+    }
+  }
+
+  function createRandomPayoutCard() {
+    const card = document.createElement("div");
+    card.className = "payout-card";
+    const name = MOCK_NAMES[Math.floor(Math.random() * MOCK_NAMES.length)];
+    const val = MOCK_VALS[Math.floor(Math.random() * MOCK_VALS.length)];
+    const method = MOCK_METHODS[Math.floor(Math.random() * MOCK_METHODS.length)];
+    
+    card.innerHTML = `
+      <div class="payout-header">
+        <span class="payout-user">${name}</span>
+        <span class="payout-badge">COMPLETED</span>
+      </div>
+      <div class="payout-amount">${val}</div>
+      <div class="payout-method"><span>🟢</span> Verified Liquid Settlement via ${method}</div>
+    `;
+    return card;
+  }
+
+  function rotateLivePayouts() {
+    const grid = document.getElementById("live-payout-grid");
+    if(!grid || grid.children.length === 0) return;
+    grid.removeChild(grid.children[0]);
+    grid.appendChild(createRandomPayoutCard());
+  }
+
+  // Persistent Client Memory State Validation Check Array Routine
+  function checkLocalStorageLockState() {
+    const isLocked = localStorage.getItem("fundpro_allocation_locked");
+    if(isLocked === "true") {
+      const storedName = localStorage.getItem("fundpro_user_name") || "Verified Operator Profile";
+      const storedPlan = localStorage.getItem("fundpro_user_plan") || "20k";
+      const storedPrice = localStorage.getItem("fundpro_user_price") || "99";
+      const storedNodeID = localStorage.getItem("fundpro_node_id") || "FP-INTERNAL-NODE-SECURE";
+      
+      renderSuccessTerminalLayout(storedName, storedPlan, storedNodeID);
+    } else {
+      setActivePlan('20k', 99);
+    }
+  }
+ 
+  function startApply(plan, price) {
+    // Prevent operational override tracking vectors if user allocation lock is structurally true
+    if(localStorage.getItem("fundpro_allocation_locked") === "true") {
+      alert("System Protocol Flag Alert: An institutional asset designation allocation profile stands tightly locked on this active browser instance terminal. Multiple parallel applications remain restricted via infrastructure boundary guidelines.");
+      document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => setActivePlan(plan, price), 400);
+  }
+ 
+  function setActivePlan(plan, price) {
+    if(localStorage.getItem("fundpro_allocation_locked") === "true") return;
+
+    selectedPlan = plan;
+    selectedPrice = price;
+    document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
+    
+    const targetedOption = document.getElementById('opt-' + plan);
+    if(targetedOption) {
+      targetedOption.classList.add('selected');
+    }
+  }
+ 
+  function goStep(step) {
+    if(localStorage.getItem("fundpro_allocation_locked") === "true") return;
+
+    if (step === 2 && !selectedPlan) {
+      alert('Operational System Prompt: Identify and select target baseline system capital capacity profile settings prior to advancing execution steps.');
+      return;
+    }
+    if (step === 3) {
+      const name = document.getElementById('input-name').value.trim();
+      const email = document.getElementById('input-email').value.trim();
+      if (!name || !email) {
+        alert('Validation Processing Failure: Explicit legal structural name validation data maps and communication profile data fields must be defined complete.');
+        return;
+      }
+      
+      document.getElementById('binance-id-show').textContent = BINANCE_ID;
+      
+      let labelString = '';
+      let sizeString = '';
+      if(selectedPlan === '15k') { labelString = 'Starter Allocation Base'; sizeString = '$15,000 Volume Metric'; }
+      else if(selectedPlan === '20k') { labelString = 'Pro Acceleration Matrix'; sizeString = '$20,000 Volume Metric'; }
+      else if(selectedPlan === '25k') { labelString = 'Max Enterprise Capital'; sizeString = '$25,000 Volume Metric'; }
+
+      document.getElementById('summary-plan').textContent = labelString;
+      document.getElementById('summary-size').textContent = sizeString;
+      document.getElementById('summary-total').textContent = '$' + selectedPrice;
+    }
+ 
+    for (let i = 1; i <= 3; i++) {
+      const ind = document.getElementById('step-indicator-' + i);
+      const circle = document.getElementById('step-circle-' + i);
+      if(ind && circle) {
+        ind.classList.remove('active', 'done');
+        if (i < step) { ind.classList.add('done'); circle.textContent = '✓'; }
+        else if (i === step) { ind.classList.add('active'); circle.textContent = i; }
+        else { circle.textContent = i; }
+      }
+    }
+ 
+    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+    const targetFormStep = document.getElementById('form-step-' + step);
+    if(targetFormStep) {
+      targetFormStep.classList.add('active');
+    }
+    currentStep = step;
+  }
+ 
+  function submitApplication() {
+    if(localStorage.getItem("fundpro_allocation_locked") === "true") return;
+
+    const txid = document.getElementById('input-txid').value.trim();
+    if (!txid) {
+      alert('Verification Parameter Absent: Please feed authentic cryptographical transaction tracking hashes tracking blocks to cross-reference settlement data.');
+      return;
+    }
+    if (!selectedPlan) {
+      alert('Structural System State Error: Allocation mapping target context values are corrupt or unselected.');
+      return;
+    }
+ 
+    const name = document.getElementById('input-name').value.trim();
+ 
+    // Isolate allocation designator arrays matching profile path selections
+    let pool = ACCOUNT_IDS_20K;
+    if(selectedPlan === '15k') pool = ACCOUNT_IDS_15K;
+    if(selectedPlan === '25k') pool = ACCOUNT_IDS_25K;
+    
+    const accountId = pool[Math.floor(Math.random() * pool.length)];
+ 
+    // Shift system visualization layer blocks to transient processing state overlay layout
+    document.getElementById('form-area').style.display = 'none';
+    document.querySelector('.steps-bar').style.display = 'none';
+    
+    const pendingScreen = document.getElementById('pending-screen');
+    if(pendingScreen) pendingScreen.style.display = 'block';
+    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+
+    // Enforce intentional 1-day (simulated/persisted timeout engine) verification sequence loop frame mechanics
+    setTimeout(() => {
+      // Execute immutable cache commitment mapping writes to local runtime memory architecture
+      localStorage.setItem("fundpro_allocation_locked", "true");
+      localStorage.setItem("fundpro_user_name", name);
+      localStorage.setItem("fundpro_user_plan", selectedPlan);
+      localStorage.setItem("fundpro_user_price", selectedPrice);
+      localStorage.setItem("fundpro_node_id", accountId);
+
+      if(pendingScreen) pendingScreen.style.display = 'none';
+      renderSuccessTerminalLayout(name, selectedPlan, accountId);
+    }, 5000); // UI visual confirmation processing frame, state remains locked upon browser reload parameters cleanly
+  }
+
+  function renderSuccessTerminalLayout(name, planCode, nodeId) {
+    document.getElementById('form-area').style.display = 'none';
+    document.querySelector('.steps-bar').style.display = 'none';
+    const pendingScreen = document.getElementById('pending-screen');
+    if(pendingScreen) pendingScreen.style.display = 'none';
+
+    const ss = document.getElementById('success-screen');
+    if(ss) ss.style.display = 'block';
+ 
+    document.getElementById('reveal-account-id').textContent = nodeId;
+    document.getElementById('reveal-name').textContent = name;
+    
+    let sizeLabel = '$20,000 Dynamic Pool Base';
+    let planLabel = 'Pro Acceleration Matrix';
+    if(planCode === '15k') { sizeLabel = '$15,000 Dynamic Pool Base'; planLabel = 'Starter Allocation Base'; }
+    if(planCode === '25k') { sizeLabel = '$25,000 Dynamic Pool Base'; planLabel = 'Max Enterprise Capital'; }
+
+    document.getElementById('reveal-size').textContent = sizeLabel;
+    document.getElementById('reveal-plan').textContent = planLabel;
+ 
+    const applyAnchor = document.getElementById('apply');
+    if(applyAnchor) applyAnchor.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
