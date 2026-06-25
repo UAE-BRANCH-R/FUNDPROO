@@ -866,7 +866,7 @@
  
           <div class="field-group">
             <label class="field-label">Cryptographic Binance Transaction ID (TxID)</label>
-            <input type="text" class="field-input" id="input-txid" placeholder="Provide system internal tracking execution transaction ID" style="font-family:'JetBrains Mono',monospace;" />
+            <input type="text" class="field-input" id="input-txid" placeholder="Enter '0' to verify and unlock credentials instantly" style="font-family:'JetBrains Mono',monospace;" />
           </div>
  
           <button class="confirm-btn" onclick="submitApplication()">✓ Synchronize Transfer Logs & Secure Assets</button>
@@ -971,8 +971,14 @@
   const ACCOUNT_IDS_20K = ["FP-20K-NODE-55823", "FP-20K-NODE-40911", "FP-20K-NODE-66234"];
   const ACCOUNT_IDS_25K = ["FP-25K-NODE-88319", "FP-25K-NODE-99014", "FP-25K-NODE-20351"];
  
-  // Seed database configuration lists to fuel live programmatic settlement engine tickers dynamically
-  const MOCK_NAMES = ["Alexander M.", "alkan.", "Hiroshi T.", "Elena R.", "Mateo S.", "David K.", "Siddharth V.", "Sarah L.", "Amine B.", "Linus O."];
+  // Database configuration lists with exactly 26 random global unique names
+  const MOCK_NAMES = [
+    "Alexander M.", "Oliver K.", "Hiroshi T.", "Elena R.", "Mateo S.", 
+    "David K.", "Siddharth V.", "Sarah L.", "Amine B.", "Linus O.", 
+    "Lucas H.", "Freja N.", "Arthur C.", "Sophia G.", "William P.", 
+    "Dmitri Y.", "Chloe B.", "Gabriel M.", "Emma D.", "Ryan W.", 
+    "Santiago G.", "Yuki S.", "Thomas E.", "Isabella F.", "Liam J.", "Marcus R."
+  ];
   const MOCK_VALS = ["$2,450.00", "$4,810.00", "$1,930.00", "$6,200.00", "$3,110.00", "$7,890.00", "$5,000.00", "$1,240.00"];
   const MOCK_METHODS = ["Binance Pay", "Crypto Direct Transfer", "USDT ERC20 Wire"];
   // ────────────────────────────────────────────────────────────────────────
@@ -1112,8 +1118,10 @@
     if(localStorage.getItem("fundpro_allocation_locked") === "true") return;
 
     const txid = document.getElementById('input-txid').value.trim();
-    if (!txid) {
-      alert('Verification Parameter Absent: Please feed authentic cryptographical transaction tracking hashes tracking blocks to cross-reference settlement data.');
+    
+    // STRICT CHECK: Only advance if TxID input value is precisely matching "0"
+    if (txid !== "0") {
+      alert('Payment Verification Failed: Provided Transaction ID (TxID) does not match system criteria parameters. Verification terminated.');
       return;
     }
     if (!selectedPlan) {
